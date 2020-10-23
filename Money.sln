@@ -3,27 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money", "Money\Money.csproj", "{EF6FA4B3-1F8A-4F41-A832-D852442B28B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money", "Money\Money.csproj", "{EF6FA4B3-1F8A-4F41-A832-D852442B28B7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{DF7C81D6-2297-4CF1-BC06-078754CC6F86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{3887808D-3669-4969-8832-702D5B221E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Webapi", "Money.Webapi\Money.Webapi.csproj", "{3978033A-D5D2-41F8-8178-9C5ABE14E8A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Webapi", "Money.Webapi\Money.Webapi.csproj", "{3978033A-D5D2-41F8-8178-9C5ABE14E8A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.JobService", "Money.Job\Money.JobService.csproj", "{0708BC1A-C1A4-409E-8719-617739FFD771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.JobService", "Money.Job\Money.JobService.csproj", "{0708BC1A-C1A4-409E-8719-617739FFD771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Model", "Money.Model\Money.Model.csproj", "{CA83A9A1-90B8-4A26-B119-4AEE197E31E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Model", "Money.Model\Money.Model.csproj", "{CA83A9A1-90B8-4A26-B119-4AEE197E31E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{3C6769D8-9F38-4C23-98B6-0827130C2DC9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{BA7BFA51-FCDA-45C8-AD20-963AAF86ABE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Test", "Money.Test\Money.Test.csproj", "{4E2AF5D5-0A16-4446-AAFE-0134DE0761F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Test", "Money.Test\Money.Test.csproj", "{4E2AF5D5-0A16-4446-AAFE-0134DE0761F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{AA9EE35E-8C38-4F45-BC74-9507B8AC9E8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Repository", "Money.Repository\Money.Repository.csproj", "{8B340EE5-90AD-47A0-B802-FFB1A7A20041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Repository", "Money.Repository\Money.Repository.csproj", "{8B340EE5-90AD-47A0-B802-FFB1A7A20041}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{730121F0-E812-4D03-A0F2-B069CC91AE7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Helper", "Money.Helper\Money.Helper.csproj", "{937A57BE-F5E9-4778-BBE5-A07E2B36E055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{8B340EE5-90AD-47A0-B802-FFB1A7A20041}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B340EE5-90AD-47A0-B802-FFB1A7A20041}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B340EE5-90AD-47A0-B802-FFB1A7A20041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{CA83A9A1-90B8-4A26-B119-4AEE197E31E6} = {3C6769D8-9F38-4C23-98B6-0827130C2DC9}
 		{4E2AF5D5-0A16-4446-AAFE-0134DE0761F3} = {BA7BFA51-FCDA-45C8-AD20-963AAF86ABE1}
 		{8B340EE5-90AD-47A0-B802-FFB1A7A20041} = {AA9EE35E-8C38-4F45-BC74-9507B8AC9E8D}
+		{937A57BE-F5E9-4778-BBE5-A07E2B36E055} = {730121F0-E812-4D03-A0F2-B069CC91AE7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7FC6BD7-8021-43EC-B070-090510B879DD}

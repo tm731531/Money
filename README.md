@@ -14,8 +14,8 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
 # 工作項目
 |          | 工作      | 是否完成
 | -------- | -------- | -------- 
-| 1     | DB設計     |  
-| 2     | Job塞資料     |  
+| 1     | DB設計     |V  
+| 2     | Job塞資料     |V  
 | 3     | Webapi專案開發     | 
 
 

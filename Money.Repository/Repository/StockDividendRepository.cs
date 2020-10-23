@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Money.Repository.Repository
+namespace Money.Repository
 {
     public class StockDividendRepository : BulkInsert<StockDividendDTO>, IDisposable, ICRUD<StockDividendDTO>
     {

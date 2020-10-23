@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Money.Helper\Money.Helper.csproj" />
+    <ProjectReference Include="..\Money.Job\Money.JobService.csproj" />
     <ProjectReference Include="..\Money.Model\Money.Model.csproj" />
     <ProjectReference Include="..\Money.Repository\Money.Repository.csproj" />
   </ItemGroup>

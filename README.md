@@ -16,7 +16,7 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
 | -------- | -------- | -------- 
 | 1     | DB設計     |V  
 | 2     | Job塞資料     |V  
-| 3     | Webapi專案開發     | 
+| 3     | Webapi專案開發     | V
 
 
 # 議題
@@ -25,9 +25,11 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
    2 表設計每日一張表或是使用儲存體的建立分割區  
    3 同樣一分的資料第二次塞入應該無效  
 2. 1 job應該以量少支援多個爬蟲為主  
-3. 1 嚴格遞增的邏輯運算以及檢察
-4. 1 DBJOB取消單筆INSERT，使用大量的BCP(加速並且減低LOCK發生
-5. 1 讀取資料時 不使用nolock  
+3. 1 嚴格遞增的邏輯運算以及檢察(Test)
+4. 1 DBJOB取消單筆INSERT，使用大量的BCP(加速並且減低LOCK發生  
+   2 讀取資料時 不使用nolock，避免髒讀   
+   3 避免讀取過大量的資料後回來用linq收縮，因此Repository裡面多寫幾個function 等日後有共同方向去做。
+ 
 
 
 
@@ -44,18 +46,22 @@ input
   "days": 1
 }
 output 
-[
-  {
-    "code": "2330",
-    "record_date": "109/10/19",
-    "dividend_yield": 1.23,
-    "dividend_year": 108,
-    "pe_ratio": 9.54,
-    "price_net_ratio": 1.25,
-    "financial_year": 109,
-    "financial_season": 2
-  }
-]
+{
+    "data": [
+        {
+            "id": 4513,
+            "record_date": "2020-10-23T00:00:00",
+            "code": "2330",
+            "code_name": "台積電",
+            "dividend_yield": 2.1,
+            "dividend_year": 108,
+            "pe_ratio": 25.77,
+            "price_net_ratio": 6.81,
+            "financial_year": 109,
+            "financial_season": 2
+        }
+    ]
+}
 
 ```
 
@@ -67,22 +73,50 @@ output
 ```
 input
 {
-  "record_date": "109/10/22",
-  "topN": 10
+  "record_date": "0109-10-21",
+  "topN": 3
 }
 output 
-[
-  {
-    "code": "2330",
-    "record_date": "109/10/22",
-    "dividend_yield": 1.23,
-    "dividend_year": 108,
-    "pe_ratio": 9.54,
-    "price_net_ratio": 1.25,
-    "financial_year": 109,
-    "financial_season": 2
-  }
-]
+{
+    "data": [
+        {
+            "id": 1340,
+            "record_date": "2020-10-21T00:00:00",
+            "code": "6505",
+            "code_name": "台塑化",
+            "dividend_yield": 3.56,
+            "dividend_year": 108,
+            "pe_ratio": 904.44,
+            "price_net_ratio": 2.91,
+            "financial_year": 109,
+            "financial_season": 2
+        },
+        {
+            "id": 1144,
+            "record_date": "2020-10-21T00:00:00",
+            "code": "3189",
+            "code_name": "景碩",
+            "dividend_yield": 1.39,
+            "dividend_year": 108,
+            "pe_ratio": 797.78,
+            "price_net_ratio": 1.27,
+            "financial_year": 109,
+            "financial_season": 2
+        },
+        {
+            "id": 1138,
+            "record_date": "2020-10-21T00:00:00",
+            "code": "3062",
+            "code_name": "建漢",
+            "dividend_yield": 1.04,
+            "dividend_year": 108,
+            "pe_ratio": 722.5,
+            "price_net_ratio": 0.89,
+            "financial_year": 109,
+            "financial_season": 2
+        }
+    ]
+}
 
 ```
 
@@ -95,14 +129,14 @@ output
 input
 {
   "code": "2330",
-  "record_date_start": "109/10/22",
-  "record_date_end": "109/10/23"
+  "record_date_start": "0109-10-19",
+  "record_date_end": "0109-10-23"
 }
 output 
 {
-  "total_days":2,
-  "min_pe_ratio_date": "109/10/22",
-  "max_pe_ratio_date": "109/10/23"
+    "total_days": 2,
+    "min_pe_ratio_date": "2020-10-19T00:00:00",
+    "max_pe_ratio_date": "2020-10-20T00:00:00"
 }
 
 ```

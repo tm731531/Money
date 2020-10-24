@@ -41,7 +41,7 @@ namespace Money.Webapi.Controllers
         /// <param name="value"></param>
         [HttpPost]
         [Route("GetPERatioByDay")]
-        public ActionResult<GetPERatioByDayResponse> GetPERatioByDay(GetDataByDaysRequest value)
+        public ActionResult<GetPERatioByDayResponse> GetPERatioByDay(GetPERatioByDayRequest value)
         {
             
             GetPERatioByDayResponse getPERatioByDayResponse = new GetPERatioByDayResponse();

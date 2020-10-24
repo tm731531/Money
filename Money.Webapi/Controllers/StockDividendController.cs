@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Money.Model.WebView;
+using Money.Repository;
+using Money.WebService.WorkClass;
 
 namespace Money.Webapi.Controllers
 {
@@ -12,6 +14,11 @@ namespace Money.Webapi.Controllers
     [ApiController]
     public class StockDividendController : ControllerBase
     {
+        StockDividendService _stockDividendService;
+        public StockDividendController()
+        {
+            _stockDividendService = new StockDividendService(new AzureDbConnectionHelper());
+        }
         // GET: api/StockDividend
         [HttpGet]
         [Route("Get")]
@@ -19,7 +26,7 @@ namespace Money.Webapi.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
+        
         /// <summary>
         /// 依照證券代號 搜尋最近n天的資料
         /// </summary>
@@ -28,12 +35,15 @@ namespace Money.Webapi.Controllers
         [Route("GetDataByDays")]
         public ActionResult<GetDataByDaysResponse> GetDataByDays(GetDataByDaysRequest value)
         {
-            GetDataByDaysResponse getDataByDaysResponse = new GetDataByDaysResponse();
-            getDataByDaysResponse.data = new List<Model.DB.StockDividendDTO>();
-            getDataByDaysResponse.data.Add(new Model.DB.StockDividendDTO() { code = "2330" });
-            throw new Exception("未完成 ");
+            if (!CheckGetDataByDaysModel(value)) { return BadRequest(new { message="資料有誤"});
+            }
+            GetDataByDaysResponse getDataByDaysResponse = 
+                _stockDividendService.GetDataByDays(value);
+            
             return Ok(getDataByDaysResponse);
         }
+
+        
 
         /// <summary>
         /// 指定特定日期 顯示當天本益比前n名
@@ -68,6 +78,12 @@ namespace Money.Webapi.Controllers
 
             return Ok(getYieldRateInfoByDaysResponse);
         }
-
+        private bool CheckGetDataByDaysModel(GetDataByDaysRequest value)
+        {
+            bool result = true;
+            if (string.IsNullOrEmpty(value.code)) { result = false; };
+            if (value.days < 0) { result = false; };
+            return result;
+        }
     }
 }

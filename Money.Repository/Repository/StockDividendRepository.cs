@@ -1,8 +1,10 @@
 ﻿using Dapper;
 using Money.Model.DB;
+using Money.Model.WebView;
 using Money.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Money.Repository
@@ -17,6 +19,7 @@ namespace Money.Repository
             _DatabaseConnection = databaseConnection;
         }
 
+      
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -91,5 +94,26 @@ namespace Money.Repository
             }
            
         }
+        public List<StockDividendDTO> SearchDataByDaysAndCode(GetDataByDaysRequest value)
+        {
+            try
+            {
+                string sqlCommand = $@"SELECT top (@days) *
+                                              FROM [dbo].[stock_dividend] sd (nowait)
+                                              inner join  f_date_without_public_holiday() fd  on  sd.record_date =  fd.current_dates
+                                              where code = @code
+                                              order by record_date desc";
+                using (var conn = _DatabaseConnection.Create())
+                {
+                    var result = conn.Query<StockDividendDTO>(sqlCommand, new { days= value.days, code = value.code }).ToList();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

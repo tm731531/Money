@@ -26,7 +26,7 @@ namespace Money.Webapi.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        
+
         /// <summary>
         /// 依照證券代號 搜尋最近n天的資料
         /// </summary>
@@ -35,15 +35,17 @@ namespace Money.Webapi.Controllers
         [Route("GetDataByDays")]
         public ActionResult<GetDataByDaysResponse> GetDataByDays(GetDataByDaysRequest value)
         {
-            if (!CheckGetDataByDaysModel(value)) { return BadRequest(new { message="資料有誤"});
+            if (!CheckGetDataByDaysModel(value))
+            {
+                return BadRequest(new { message = "資料有誤" });
             }
-            GetDataByDaysResponse getDataByDaysResponse = 
+            GetDataByDaysResponse getDataByDaysResponse =
                 _stockDividendService.GetDataByDays(value);
-            
+
             return Ok(getDataByDaysResponse);
         }
 
-        
+
 
         /// <summary>
         /// 指定特定日期 顯示當天本益比前n名
@@ -53,7 +55,7 @@ namespace Money.Webapi.Controllers
         [Route("GetPERatioByDay")]
         public ActionResult<GetPERatioByDayResponse> GetPERatioByDay(GetPERatioByDayRequest value)
         {
-            
+
             GetPERatioByDayResponse getPERatioByDayResponse = new GetPERatioByDayResponse();
             getPERatioByDayResponse.data = new List<Model.DB.StockDividendDTO>();
             getPERatioByDayResponse.data.Add(new Model.DB.StockDividendDTO() { code = "2331" });

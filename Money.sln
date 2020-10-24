@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Repository", "Money.R
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{730121F0-E812-4D03-A0F2-B069CC91AE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.Helper", "Money.Helper\Money.Helper.csproj", "{937A57BE-F5E9-4778-BBE5-A07E2B36E055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Money.Helper", "Money.Helper\Money.Helper.csproj", "{937A57BE-F5E9-4778-BBE5-A07E2B36E055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money.WebService", "Money.WebService\Money.WebService.csproj", "{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{937A57BE-F5E9-4778-BBE5-A07E2B36E055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{4E2AF5D5-0A16-4446-AAFE-0134DE0761F3} = {BA7BFA51-FCDA-45C8-AD20-963AAF86ABE1}
 		{8B340EE5-90AD-47A0-B802-FFB1A7A20041} = {AA9EE35E-8C38-4F45-BC74-9507B8AC9E8D}
 		{937A57BE-F5E9-4778-BBE5-A07E2B36E055} = {730121F0-E812-4D03-A0F2-B069CC91AE7B}
+		{47DC7ED4-7D78-4C2A-A606-C456D9BD6A65} = {3887808D-3669-4969-8832-702D5B221E75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7FC6BD7-8021-43EC-B070-090510B879DD}

@@ -26,7 +26,8 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
    3 同樣一分的資料第二次塞入應該無效  
 2. 1 job應該以量少支援多個爬蟲為主  
 3. 1 嚴格遞增的邏輯運算以及檢察
-  
+4. 1 DBJOB取消單筆INSERT，使用大量的BCP(加速並且減低LOCK發生
+5. 1 讀取資料時 不使用nolock  
 
 
 

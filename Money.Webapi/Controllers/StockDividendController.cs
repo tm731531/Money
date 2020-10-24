@@ -14,6 +14,8 @@ namespace Money.Webapi.Controllers
     [ApiController]
     public class StockDividendController : ControllerBase
     {
+        private const int YearLimit = 1000;
+        private const int YearForROCBuild = 1911;
         StockDividendService _stockDividendService;
         public StockDividendController()
         {
@@ -60,10 +62,10 @@ namespace Money.Webapi.Controllers
                 return BadRequest(new { message = "資料有誤" });
             }
             
-            GetPERatioByDayResponse getDataByDaysResponse =
+            GetPERatioByDayResponse getPERatioByDayResponse =
                 _stockDividendService.GetPERatioByDay(value);
 
-            return Ok(getDataByDaysResponse);
+            return Ok(getPERatioByDayResponse);
         }
 
 
@@ -75,16 +77,21 @@ namespace Money.Webapi.Controllers
         /// <param name="value"></param>
         [HttpPost]
         [Route("GetYieldRateInfoByDays")]
-        public ActionResult<GetDataByDaysResponse> GetYieldRateInfoByDays(GetDataByDaysRequest value)
+        public ActionResult<GetYieldRateInfoByDaysResponse> GetYieldRateInfoByDays(GetYieldRateInfoByDaysRequest value)
         {
-            GetYieldRateInfoByDaysResponse getYieldRateInfoByDaysResponse = new GetYieldRateInfoByDaysResponse();
-            getYieldRateInfoByDaysResponse.total_days = 5;
-            getYieldRateInfoByDaysResponse.max_pe_ratio_date = DateTime.Now.AddDays(1);
-            getYieldRateInfoByDaysResponse.min_pe_ratio_date = DateTime.Now.AddDays(-1);
-            throw new Exception("未完成 ");
+            if (!CheckGetYieldRateInfoByDaysModel(value))
+            {
+                return BadRequest(new { message = "資料有誤" });
+            }
+
+            GetYieldRateInfoByDaysResponse getYieldRateInfoByDaysResponse =
+                _stockDividendService.GetYieldRateInfoByDays(value);
 
             return Ok(getYieldRateInfoByDaysResponse);
         }
+
+       
+
         private bool CheckGetDataByDaysModel(GetDataByDaysRequest value)
         {
             bool result = true;
@@ -95,13 +102,28 @@ namespace Money.Webapi.Controllers
         private bool CheckGetPERatioByDayModel(GetPERatioByDayRequest value)
         {
             bool result = true;
-            //  if (value.record_date.) { result = false; };
             if (value.topN < 0) { result = false; };
-            if (value.record_date.Year < 1000)
+            if (value.record_date.Year < YearLimit)
             {
-                value.record_date = value.record_date.AddYears(1911);
+                value.record_date = value.record_date.AddYears(YearForROCBuild);
             }
             value.record_date = value.record_date.Date;
+            return result;
+        }
+        private bool CheckGetYieldRateInfoByDaysModel(GetYieldRateInfoByDaysRequest value)
+        {
+            bool result = true;
+            if (string.IsNullOrEmpty(value.code)) { result = false; };
+            if (value.record_date_start.Year < YearLimit)
+            {
+                value.record_date_start = value.record_date_start.AddYears(YearForROCBuild);
+            }
+            if (value.record_date_end.Year < YearLimit)
+            {
+                value.record_date_end = value.record_date_end.AddYears(YearForROCBuild);
+            }
+            value.record_date_start = value.record_date_start.Date;
+            value.record_date_end = value.record_date_end.Date;
             return result;
         }
     }

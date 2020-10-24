@@ -19,7 +19,7 @@ namespace Money.Repository
             _DatabaseConnection = databaseConnection;
         }
 
-      
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -50,7 +50,7 @@ namespace Money.Repository
                 BulkInsertRecords(ref ls, "stock_dividend", _DatabaseConnection.Create().ConnectionString);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -92,7 +92,7 @@ namespace Money.Repository
             {
                 throw ex;
             }
-           
+
         }
         public List<StockDividendDTO> SearchDataByDaysAndCode(GetDataByDaysRequest value)
         {
@@ -105,7 +105,7 @@ namespace Money.Repository
                                               order by record_date desc";
                 using (var conn = _DatabaseConnection.Create())
                 {
-                    var result = conn.Query<StockDividendDTO>(sqlCommand, new { days= value.days, code = value.code }).ToList();
+                    var result = conn.Query<StockDividendDTO>(sqlCommand, new { days = value.days, code = value.code }).ToList();
                     return result;
                 }
             }
@@ -127,6 +127,33 @@ namespace Money.Repository
                 using (var conn = _DatabaseConnection.Create())
                 {
                     var result = conn.Query<StockDividendDTO>(sqlCommand, new { topN = value.topN, record_date = value.record_date }).ToList();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<StockDividendDTO> SearchYieldRateInfoByDays(GetYieldRateInfoByDaysRequest value)
+        {
+            try
+            {
+                string sqlCommand = $@"SELECT  *
+                                               FROM [dbo].[stock_dividend] sd (nowait)
+                                               inner join  f_date_without_public_holiday() fd  on  sd.record_date =  fd.current_dates
+                                               where record_date  between @record_date_start and @record_date_end
+                                               and code =@code 
+                                               order by record_date";
+                using (var conn = _DatabaseConnection.Create())
+                {
+                    var result = conn.Query<StockDividendDTO>(sqlCommand, new
+                    {
+                        code = value.code,
+                        record_date_start = value.record_date_start,
+                        record_date_end = value.record_date_end
+                    }).ToList();
                     return result;
                 }
             }

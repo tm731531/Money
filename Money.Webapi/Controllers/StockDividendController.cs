@@ -55,13 +55,18 @@ namespace Money.Webapi.Controllers
         [Route("GetPERatioByDay")]
         public ActionResult<GetPERatioByDayResponse> GetPERatioByDay(GetPERatioByDayRequest value)
         {
+            if (!CheckGetPERatioByDayModel(value))
+            {
+                return BadRequest(new { message = "資料有誤" });
+            }
+            
+            GetPERatioByDayResponse getDataByDaysResponse =
+                _stockDividendService.GetPERatioByDay(value);
 
-            GetPERatioByDayResponse getPERatioByDayResponse = new GetPERatioByDayResponse();
-            getPERatioByDayResponse.data = new List<Model.DB.StockDividendDTO>();
-            getPERatioByDayResponse.data.Add(new Model.DB.StockDividendDTO() { code = "2331" });
-            throw new Exception("未完成 ");
-            return Ok(getPERatioByDayResponse);
+            return Ok(getDataByDaysResponse);
         }
+
+
 
 
         /// <summary>
@@ -85,6 +90,18 @@ namespace Money.Webapi.Controllers
             bool result = true;
             if (string.IsNullOrEmpty(value.code)) { result = false; };
             if (value.days < 0) { result = false; };
+            return result;
+        }
+        private bool CheckGetPERatioByDayModel(GetPERatioByDayRequest value)
+        {
+            bool result = true;
+            //  if (value.record_date.) { result = false; };
+            if (value.topN < 0) { result = false; };
+            if (value.record_date.Year < 1000)
+            {
+                value.record_date = value.record_date.AddYears(1911);
+            }
+            value.record_date = value.record_date.Date;
             return result;
         }
     }

@@ -10,7 +10,7 @@ namespace Money.Model.WebView
         /// <summary>
         /// 特定日期 
         /// </summary>
-        public string record_date { get; set; }
+        public DateTime record_date { get; set; }
         /// <summary>
         /// 本益比前n名
         /// </summary>

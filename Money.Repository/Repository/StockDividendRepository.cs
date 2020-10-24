@@ -115,5 +115,26 @@ namespace Money.Repository
             }
         }
 
+        public List<StockDividendDTO> SearchPERatioByDay(GetPERatioByDayRequest value)
+        {
+            try
+            {
+                string sqlCommand = $@"SELECT top (@topN) *
+                                              FROM [dbo].[stock_dividend] sd (nowait)
+                                              inner join  f_date_without_public_holiday() fd  on  sd.record_date =  fd.current_dates
+                                              where record_date = @record_date
+                                              order by pe_ratio desc";
+                using (var conn = _DatabaseConnection.Create())
+                {
+                    var result = conn.Query<StockDividendDTO>(sqlCommand, new { topN = value.topN, record_date = value.record_date }).ToList();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

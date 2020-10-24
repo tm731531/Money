@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Money.Model.WebView;
 
 namespace Money.Webapi.Controllers
 {
@@ -13,19 +14,25 @@ namespace Money.Webapi.Controllers
     {
         // GET: api/StockDividend
         [HttpGet]
+        [Route("Get")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         /// <summary>
-        /// 
+        /// 依照證券代號 搜尋最近n天的資料
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
         [Route("GetDataByDays")]
-        public void GetDataByDays([FromBody] string value)
+        public ActionResult<GetDataByDaysResponse> GetDataByDays(GetDataByDaysRequest value)
         {
+            GetDataByDaysResponse getDataByDaysResponse = new GetDataByDaysResponse();
+            getDataByDaysResponse.data = new List<Model.DB.StockDividendDTO>();
+            getDataByDaysResponse.data.Add(new Model.DB.StockDividendDTO() { code = "2330" });
+            throw new Exception("未完成 ");
+            return Ok(getDataByDaysResponse);
         }
 
         /// <summary>
@@ -34,8 +41,14 @@ namespace Money.Webapi.Controllers
         /// <param name="value"></param>
         [HttpPost]
         [Route("GetPERatioByDay")]
-        public void GetPERatioByDay([FromBody] string value)
+        public ActionResult<GetPERatioByDayResponse> GetPERatioByDay(GetDataByDaysRequest value)
         {
+            
+            GetPERatioByDayResponse getPERatioByDayResponse = new GetPERatioByDayResponse();
+            getPERatioByDayResponse.data = new List<Model.DB.StockDividendDTO>();
+            getPERatioByDayResponse.data.Add(new Model.DB.StockDividendDTO() { code = "2331" });
+            throw new Exception("未完成 ");
+            return Ok(getPERatioByDayResponse);
         }
 
 
@@ -45,8 +58,15 @@ namespace Money.Webapi.Controllers
         /// <param name="value"></param>
         [HttpPost]
         [Route("GetYieldRateInfoByDays")]
-        public void GetYieldRateInfoByDays([FromBody] string value)
+        public ActionResult<GetDataByDaysResponse> GetYieldRateInfoByDays(GetDataByDaysRequest value)
         {
+            GetYieldRateInfoByDaysResponse getYieldRateInfoByDaysResponse = new GetYieldRateInfoByDaysResponse();
+            getYieldRateInfoByDaysResponse.total_days = 5;
+            getYieldRateInfoByDaysResponse.max_pe_ratio_date = DateTime.Now.AddDays(1);
+            getYieldRateInfoByDaysResponse.min_pe_ratio_date = DateTime.Now.AddDays(-1);
+            throw new Exception("未完成 ");
+
+            return Ok(getYieldRateInfoByDaysResponse);
         }
 
     }

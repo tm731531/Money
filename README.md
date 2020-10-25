@@ -153,3 +153,33 @@ output
 }
 
 ```
+
+# sql  
+```
+
+--Description : 避開假日的日期
+Create FUNCTION [dbo].[f_date_without_public_holiday]()
+returns @T table(  current_dates date,
+	    rank_day int,rank_week int,rank_year int)
+AS
+begin 
+declare @dt  int,@twodt int
+set @dt =20
+set @twodt =1
+declare @dt_date  date
+set @dt_date = GETDATE()
+	WHILE (@twodt <= @dt)
+	BEGIN
+         if( DATEPART(dw, @dt_date) !=1 and DATEPART(dw, @dt_date) !=7 and  not exists(select 1 from [public_holiday] where target_date = @dt_date))
+		 BEGIN
+		 insert into  @T select @dt_date , @twodt,DATEPART(ww, @dt_date),DATEPART(yyyy, @dt_date)
+		 set  @twodt=@twodt+1
+		 END
+
+    set @dt_date= DATEADD(day ,-1 ,@dt_date)
+	END
+  
+  RETURN
+
+END
+```

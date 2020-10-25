@@ -19,6 +19,19 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
 | 3     | Webapi專案開發     | V
 
 
+# 專案
+|          | 名稱      | 功用
+| -------- | -------- | -------- 
+| 1     | Money     |job層  
+| 2     | Money.Webapi     |webapi層  
+| 3     | Money.Helper     |通用輔助
+| 4     | Money.Repository     | orm操作層
+| 5     | Money.Model     | 所有的模型跟viewmodel存放地
+| 6     | Money.JobService     | 輔助job
+| 7     | Money.WebService     | 輔助webapi
+| 7     | Money.Test     | 測試
+
+
 # 議題
 
 1. 1 最近n天 如果遇到周六日跳過，遇到像是10/1那周跳過  

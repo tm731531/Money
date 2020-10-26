@@ -19,6 +19,19 @@ https://www.twse.com.tw/exchangeReport/BWIBBU_d?response=csv&date=20201021&selec
 | 3     | Webapi專案開發     | V
 
 
+# 專案
+|          | 名稱      | 功用
+| -------- | -------- | -------- 
+| 1     | Money     |job層  
+| 2     | Money.Webapi     |webapi層  
+| 3     | Money.Helper     |通用輔助
+| 4     | Money.Repository     | orm操作層
+| 5     | Money.Model     | 所有的模型跟viewmodel存放地
+| 6     | Money.JobService     | 輔助job
+| 7     | Money.WebService     | 輔助webapi
+| 7     | Money.Test     | 測試
+
+
 # 議題
 
 1. 1 最近n天 如果遇到周六日跳過，遇到像是10/1那周跳過  
@@ -139,4 +152,34 @@ output
     "max_pe_ratio_date": "2020-10-20T00:00:00"
 }
 
+```
+
+# sql  
+```
+
+--Description : 避開假日的日期
+Create FUNCTION [dbo].[f_date_without_public_holiday]()
+returns @T table(  current_dates date,
+	    rank_day int,rank_week int,rank_year int)
+AS
+begin 
+declare @dt  int,@twodt int
+set @dt =20
+set @twodt =1
+declare @dt_date  date
+set @dt_date = GETDATE()
+	WHILE (@twodt <= @dt)
+	BEGIN
+         if( DATEPART(dw, @dt_date) !=1 and DATEPART(dw, @dt_date) !=7 and  not exists(select 1 from [public_holiday] where target_date = @dt_date))
+		 BEGIN
+		 insert into  @T select @dt_date , @twodt,DATEPART(ww, @dt_date),DATEPART(yyyy, @dt_date)
+		 set  @twodt=@twodt+1
+		 END
+
+    set @dt_date= DATEADD(day ,-1 ,@dt_date)
+	END
+  
+  RETURN
+
+END
 ```
